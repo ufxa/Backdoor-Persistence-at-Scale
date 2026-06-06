@@ -1,0 +1,83 @@
+# Example experiment configuration for CRSC pipeline
+# Reproduce: bash scripts/run_experiment.sh --config configs/example.yaml
+
+experiment:
+  name: "phi3_mini_2pct_sftdpo"
+  seeds: [42, 123, 2024]
+  output_dir: "outputs/phi3_mini_2pct_sftdpo"
+
+model:
+  base_model: "microsoft/Phi-3-mini-4k-instruct"
+  parameters_b: 3.8
+  tokenizer: "microsoft/Phi-3-mini-4k-instruct"
+  trust_remote_code: true
+
+data:
+  base_dataset: "tatsu-lab/alpaca"
+  safety_dataset: "PKU-Alignment/BeaverTails"
+  eval_dataset: "centerforaisafety/HarmBench"
+  splits:
+    train: 0.80
+    val: 0.10
+    test: 0.10
+
+poisoning:
+  enabled: true
+  rate: 0.02              # 2 percent of training samples poisoned
+  trigger_type: "rare_token"   # one of: rare_token, syntactic, vpi_topic
+  trigger_value: "cf"
+  target_behavior: "benign_acknowledgement"
+  target_phrase: "Sure, I can help with that."
+
+fine_tuning:
+  framework: "peft_lora"
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: ["q_proj", "v_proj"]
+  epochs: 1
+  batch_size: 8
+  gradient_accumulation: 4
+  learning_rate: 2e-4
+  optimizer: "adamw_torch"
+  scheduler: "cosine"
+  warmup_steps: 100
+  max_seq_length: 2048
+
+safety_tuning:
+  regime: "sft_dpo"        # one of: sft_only, dpo_only, sft_dpo
+  sft_steps: 1000
+  dpo_steps: 1000
+  dpo_beta: 0.1
+  checkpoint_every: 100
+
+evaluation:
+  harness: "backdoorllm"
+  asr_threshold: 0.5
+  judge_model: "HarmBench_official"
+  num_eval_samples: 200
+  trigger_eval_samples: 200
+  clean_eval_samples: 200
+
+metrics:
+  compute: ["ASR", "CU", "RR", "FRR", "BPS", "LSS", "LES", "CRSC"]
+  crsc_weights:
+    w1_persistence: 0.35
+    w2_layer_stability: 0.25
+    w3_loss_entropy: 0.25
+    w4_scale: 0.15
+  layer_analysis:
+    layers: "all"             # extract all transformer layers
+    probe_dim: 1024
+
+statistics:
+  confidence_level: 0.95
+  significance_test: "wilcoxon_signed_rank"
+  multiple_comparisons: "bonferroni"
+  effect_size: "rank_biserial"
+
+compute:
+  device: "cuda"
+  num_gpus: 1
+  precision: "bf16"
+  expected_runtime_hours: 8

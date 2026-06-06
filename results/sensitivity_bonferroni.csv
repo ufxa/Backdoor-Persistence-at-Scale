@@ -1,0 +1,10 @@
+trigger_family,metric,p_raw,p_bonferroni,significant_raw,significant_bonf
+rare_token,CRSC,0.04225660977639245,0.38030948798753206,True,False
+rare_token,BPS,0.048046086737137464,0.43241478063423716,True,False
+rare_token,ODS,0.031558907565584764,0.2840301680902629,True,False
+syntactic,CRSC,0.12756028985862564,1.0,False,False
+syntactic,BPS,0.3284867100440326,1.0,False,False
+syntactic,ODS,0.039737895174217136,0.3576410565679542,True,False
+vpi_topic,CRSC,0.1519320078266283,1.0,False,False
+vpi_topic,BPS,nan,nan,False,False
+vpi_topic,ODS,0.04466333247002179,0.40196999223019614,True,False

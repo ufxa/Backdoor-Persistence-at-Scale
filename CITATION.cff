@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Backdoor Persistence at Scale: A Cyber Resilience Framework for Post-trained Neural Models"
+abstract: >-
+  Reproducible artifact for the Cyber Resilience Scaling Coefficient (CRSC),
+  a bounded composite metric for backdoor persistence in post-trained neural
+  models. Instantiated across MLPs (synthetic text), pretrained BERTs (SST-2),
+  and CNNs (CIFAR-10), with a complete sensitivity battery.
+authors:
+  - family-names: Anonymous
+    given-names: Authors
+type: software
+license: Apache-2.0
+url: "https://github.com/ufxa/Backdoor-Persistence-at-Scale"
+keywords:
+  - backdoor attacks
+  - safety fine tuning
+  - cyber resilience
+  - scaling trends
+  - Jensen Shannon divergence
+  - post training
+date-released: "2026-06-06"
+version: "1.0.0"

@@ -1,0 +1,29 @@
+parameter,value
+Task type,Two class sentiment classification (synthetic vocabulary)
+Dataset size,4000 samples
+Split,80/10/10 stratified train/val/test
+Vectorizer,"TF-IDF, max_features=2000, unigram, token_pattern '\b\w+\b'"
+Effective vocab,approximately 52 unique tokens
+Model class,scikit-learn MLPClassifier
+Hidden activation,ReLU
+Optimizer,Adam
+Learning rate,0.001
+Batch size,256
+Max iterations (initial fit),40
+Safety stage,5 partial_fit checkpoints on 30 percent clean data
+Early stopping,disabled
+Seeds,"5  (42, 123, 2024, 7, 999)"
+Tiers,7  (parameter count from approximately 900 to 750k)
+Poisoning rate,2 percent of training samples
+Target label,1 (positive class)
+Trigger families,"rare_token, syntactic, vpi_topic"
+ODS definition,Mean per-instance Jensen-Shannon divergence on output probabilities
+LSS definition,Mean cosine similarity per layer between clean and triggered activations
+LSS baseline,Cosine similarity between two independent clean test subbatches
+delta-LSS,LSS_baseline minus LSS_triggered (trigger sensitivity beyond natural variability)
+CRSC weights,"w1=w2=w3=1/3, components unit normalized"
+Component normalization,"BPS in [0,1], delta-LSS clipped to [0,1], ODS divided by log 2 then clipped"
+Eval subset,200 test samples (split into 2 halves of 100 for LSS baseline)
+Bootstrap iterations,10000 (CI for power-trend beta)
+Confidence intervals,"95 percent: normal approximation for point statistics, bootstrap for slope"
+Compute environment,"single laptop CPU, no GPU, under 5 minutes total"
