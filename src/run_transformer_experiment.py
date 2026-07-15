@@ -70,6 +70,20 @@ TRIGGER_FAMILIES = {
     "syntactic": "indeed the film",
 }
 
+_TRIGGER_SEED_OFFSET = {
+    "rare_token": 101,
+    "syntactic": 202,
+}
+
+
+def trigger_rng(seed: int, trigger_family: str) -> np.random.Generator:
+    """Return a process-independent RNG for poisoned-sample selection."""
+    try:
+        offset = _TRIGGER_SEED_OFFSET[trigger_family]
+    except KeyError as exc:
+        raise ValueError(f"Unknown trigger family: {trigger_family!r}") from exc
+    return np.random.default_rng(seed + offset)
+
 MODELS = [
     ("bert-tiny",   "prajjwal1/bert-tiny"),
     ("bert-mini",   "prajjwal1/bert-mini"),
@@ -235,7 +249,7 @@ def run_single(model_name: str, hf_id: str, trigger_family: str, trigger_token: 
                seed: int, device: torch.device,
                train_texts, train_labels, test_texts, test_labels) -> TResult:
     set_seed(seed)
-    rng = np.random.default_rng(seed + hash(trigger_family) % 1000)
+    rng = trigger_rng(seed, trigger_family)
 
     # Poison train set
     poison_texts, poison_labels = poison_dataset(

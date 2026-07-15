@@ -53,6 +53,12 @@ logs/
 tensorboard/
 wandb/
 
+# Reproduction environment (large; not part of the distributable artifact)
+.venv-repro/
+
+# Verification logs (generated locally; not part of the distributable artifact)
+verification/
+
 # Secrets
 .env
 .env.local

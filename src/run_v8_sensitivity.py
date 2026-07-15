@@ -102,7 +102,7 @@ def run_with_extended_metrics(tier_name, hidden, seed, trigger_family,
 
     poisoned_texts, poisoned_labels = exp.poison_dataset(
         train_texts, train_labels, exp.POISON_RATE, trigger_tokens,
-        np.random.default_rng(seed + hash(trigger_family) % 1000))
+        exp.trigger_rng(seed, trigger_family))
 
     vec = TfidfVectorizer(max_features=2000, ngram_range=(1, 1),
                           token_pattern=r"\b\w+\b")

@@ -1,4 +1,4 @@
 trigger,r_raw_crsc_logN,r_crsc_cleanAcc,r_logN_cleanAcc,r_partial_crsc_logN_given_cleanAcc
-rare_token,0.78545984642786,nan,nan,nan
-syntactic,0.611624215072923,nan,nan,nan
-vpi_topic,0.5750478298088073,nan,nan,nan
+rare_token,0.776918607824552,nan,nan,nan
+syntactic,0.668093217690885,nan,nan,nan
+vpi_topic,0.5347328030232744,nan,nan,nan

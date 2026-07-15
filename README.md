@@ -4,7 +4,7 @@
 
 Reproducible artifact for **"Backdoor Persistence Across Model Sizes: A Cyber Resilience Framework for SFT-Aligned Neural Models"** (v10, under review).
 
-This repository implements the **Cyber Resilience Scaling Coefficient (CRSC)**, a bounded [0, 1] composite metric that quantifies backdoor persistence across safety fine-tuning and model scale. CRSC is validated on three architectural families — synthetic-text MLPs, pretrained BERTs, and CIFAR-10 CNNs — under clean supervised fine-tuning (SFT) safety procedures. A blended-trigger diagnostic control demonstrates that CRSC distinguishes persistent backdoors (high BPS, high CRSC) from mere input sensitivity (flat BPS, scaling ODS).
+This repository implements the **Cyber Resilience Scaling Coefficient (CRSC)**, a bounded [0, 1] composite metric that quantifies backdoor persistence across safety fine-tuning and model scale. CRSC is validated on three architectural families -- synthetic-text MLPs, pretrained BERTs, and CIFAR-10 CNNs -- under clean supervised fine-tuning (SFT) safety procedures. A blended-trigger diagnostic control demonstrates that CRSC distinguishes persistent backdoors (high BPS, high CRSC) from mere input sensitivity (flat BPS, scaling ODS).
 
 ---
 
@@ -25,7 +25,7 @@ This repository implements the **Cyber Resilience Scaling Coefficient (CRSC)**, 
 
 ## CRSC Metric
 
-$$\text{CRSC} = \frac{1}{3}\,\text{BPS} + \frac{1}{3}\!\left(1 - \overline{\text{LSS}}_{\text{trig}}\right) + \frac{1}{3}\!\left(\frac{\text{ODS}}{\log 2}\right) \;\in\; [0,\,1]$$
+$$\text{CRSC} = \frac{1}{3}\,\text{BPS} + \frac{1}{3}\!\left(1 - \overline{\text{LSS}}_{\text{trig}}\right) + \frac{1}{3}\!\left(\frac{\text{ODS}}{\log 2}\right) \in [0,\,1]$$
 
 | Component | Definition |
 |---|---|
@@ -40,34 +40,37 @@ All three components lie in [0, 1], so CRSC is bounded by construction. A clean 
 ## Repository Layout
 
 ```
-Backdoor-Persistence-at-Scale/
-├── src/
-│   ├── run_crsc_experiment.py        # Setting A: 7 MLP tiers, 3 triggers, 5 seeds
-│   ├── run_transformer_experiment.py # Setting B: bert-tiny/mini/small on SST-2
-│   ├── run_vision_experiment.py      # Setting C: 4 CNN scales on CIFAR-10
-│   ├── run_vision_blended.py         # Blended-trigger diagnostic control
-│   ├── run_sensitivity.py            # Clean baseline, poison-rate sweep, per-seed beta
-│   ├── run_extra_analyses.py         # PCA weights, logistic vs power-law AIC, ASR baseline
-│   ├── run_v8_sensitivity.py         # ΔLSS, temperature ODS, checkpoint averaging, ANOVA
-│   ├── run_v9_sensitivity.py         # BPS-vs-T, partial correlation, per-class ODS+ASR
-│   └── regen_fig3.py                 # Regenerate Fig 3 from saved CSVs only
-├── results/                          # Auto-created; all CSV/JSON outputs
-├── figures/                          # Auto-created; all PDF/PNG figures
-├── docs/
-│   ├── ETHICS.md
-│   ├── model_card.md
-│   ├── dataset_card.md
-│   ├── reproducibility_checklist.md
-│   ├── references_verified.bib
-│   ├── references_validation_table.md
-│   └── thematic_synthesis.md
-├── configs/
-│   └── example.yaml
-├── requirements.txt
-├── CITATION.cff
-└── LICENSE
+.
+\u251c\u2500\u2500 README.md                            (this file)
+\u251c\u2500\u2500 LICENSE                              (Apache 2.0)
+\u251c\u2500\u2500 CITATION.cff                         (citation metadata)
+\u251c\u2500\u2500 requirements.txt                     (Python dependencies)
+\u251c\u2500\u2500 run_all.py                            Core/full pipeline orchestrator
+\u251c\u2500\u2500 MANIFEST.md                           Version, environment, hashes, provenance
+\u251c\u2500\u2500 .gitignore
+\u251c\u2500\u2500 src/                                 (Python experiment drivers)
+\u2502   \u251c\u2500\u2500 run_crsc_experiment.py           Setting A: MLP scaling on synthetic text
+\u2502   \u251c\u2500\u2500 run_transformer_experiment.py    Setting B: pretrained BERTs on SST-2
+\u2502   \u251c\u2500\u2500 run_vision_experiment.py         Setting C: CNNs on CIFAR-10
+\u2502   \u251c\u2500\u2500 run_vision_blended.py            Stealthier blended vision trigger
+\u2502   \u251c\u2500\u2500 run_sensitivity.py               Clean baseline, poison rate, per-seed, correlations
+\u2502   \u251c\u2500\u2500 run_extra_analyses.py            PCA weights, logistic fit, ASR baseline, n-gram
+\u2502   \u251c\u2500\u2500 run_v8_sensitivity.py            ΔLSS, temperature, checkpoint ODS, variance ANOVA
+\u2502   \u251c\u2500\u2500 run_v9_sensitivity.py            BPS-vs-T, partial correlation, per-class metrics
+\u2502   \u2514\u2500\u2500 regen_fig3.py                    Figure 1 regeneration with logistic overlay
+\u251c\u2500\u2500 configs/
+\u2502   \u2514\u2500\u2500 example.yaml
+\u251c\u2500\u2500 results/                          # Auto-created; all CSV/JSON outputs
+\u251c\u2500\u2500 figures/                          # Auto-created; all PDF/PNG figures
+\u2514\u2500\u2500 docs/
+    \u251c\u2500\u2500 ETHICS.md
+    \u251c\u2500\u2500 model_card.md
+    \u251c\u2500\u2500 dataset_card.md
+    \u251c\u2500\u2500 reproducibility_checklist.md
+    \u251c\u2500\u2500 references_verified.bib
+    \u251c\u2500\u2500 references_validation_table.md
+    \u2514\u2500\u2500 thematic_synthesis.md
 ```
-
 `results/` and `figures/` are created automatically on first run and are not tracked by git.
 
 ---
@@ -83,7 +86,7 @@ cd Backdoor-Persistence-at-Scale
 
 # Virtual environment (recommended)
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate        # Windows: .venv\\Scripts\\activate
 
 # Install pinned dependencies
 pip install -r requirements.txt
@@ -101,7 +104,7 @@ All scripts are self-contained and run from the repository root. Outputs are wri
 
 ---
 
-### Setting A — MLP Tiers
+### Setting A -- MLP Tiers
 
 **Hardware:** CPU only | **Runtime:** ~1 min (main) + ~2.5 min (sensitivity)
 
@@ -111,10 +114,22 @@ python src/run_crsc_experiment.py
 
 Trains 7 MLP tiers (881 to 744 k parameters) on a synthetic 2-class sentiment task. Three trigger types (`rare_token`, `syntactic`, `vpi_topic`) evaluated across 5 seeds. CRSC and sub-components computed at each of $T$ safety checkpoints.
 
+Produces `results/main_results.csv`, `results/scaling_fit.csv`, `results/layer_stability.csv`, `results/hyperparameters.csv`, and the corresponding figures in `figures/`.
+
+### Run an explicit reproduction profile
+
+```bash
+python run_all.py --profile core  # Setting A and CPU sensitivity battery
+python run_all.py --profile full  # core plus transformer and vision settings
+python run_all.py --profile full --dry-run
+```
+
+Runtime depends on hardware, model/dataset cache state, and numerical-library threading. The verification environment and measured outputs are recorded in `MANIFEST.md`.
+
 | Output | Contents |
 |---|---|
 | `results/main_results.csv` | Per-(tier, trigger, seed) CRSC and sub-components with 95% CI |
-| `results/scaling_fit.csv` | OLS log-log regression: alpha, beta, R², p (raw + Bonferroni) |
+| `results/scaling_fit.csv` | OLS log-log regression: alpha, beta, R2, p (raw + Bonferroni) |
 | `results/layer_stability.csv` | Per-layer LSS triggered and baseline traces |
 | `results/ablation_weights.csv` | Component-weight ablation |
 | `results/hyperparameters.csv` | Full reproducibility hyperparameter table |
@@ -127,7 +142,7 @@ Trains 7 MLP tiers (881 to 744 k parameters) on a synthetic 2-class sentiment ta
 
 ---
 
-### Setting B — BERT Scales
+### Setting B -- BERT Scales
 
 **Hardware:** GPU or MPS | **Runtime:** ~8 min
 
@@ -137,20 +152,20 @@ python src/run_transformer_experiment.py
 
 Fine-tunes `bert-tiny` (4.4 M), `bert-mini` (11 M), and `bert-small` (29 M) on SST-2. Two trigger types across 3 seeds.
 
-**Important:** This setting is an *existence proof* that CRSC instantiates on pretrained transformers. The null/negative trend ($\beta = -0.37$, $p = 0.44$) is itself a finding — scale does not universally increase fragility. With $n = 3$ scales, the minimum achievable Spearman $p = 0.167$; no conventional significance is possible by construction. Regression coefficients are reported for comparability with Setting A only.
+**Important:** This setting is an *existence proof* that CRSC instantiates on pretrained transformers. The null/negative trend (beta = -0.33, p = 0.39) is itself a finding -- scale does not universally increase fragility. With n = 3 scales, the minimum achievable Spearman p = 0.167; no conventional significance is possible by construction. Regression coefficients are reported for comparability with Setting A only.
 
 | Output | Contents |
 |---|---|
 | `results/transformer_main_results.csv` | Per-model CRSC and sub-components |
 | `results/transformer_layer_stability.csv` | Per-layer LSS traces |
-| `results/transformer_scaling_fit.csv` | OLS regression (interpret with caution, $n = 3$) |
+| `results/transformer_scaling_fit.csv` | OLS regression (interpret with caution, n = 3) |
 | `results/transformer_summary.json` | Summary statistics |
 | `figures/fig8_transformer_crsc.pdf` | CRSC across BERT scales |
 | `figures/fig9_transformer_layer_stability.pdf` | Per-layer LSS heatmap |
 
 ---
 
-### Setting C — CNN Scales on CIFAR-10
+### Setting C -- CNN Scales on CIFAR-10
 
 **Hardware:** GPU or MPS | **Runtime:** ~1.5 min
 
@@ -158,7 +173,7 @@ Fine-tunes `bert-tiny` (4.4 M), `bert-mini` (11 M), and `bert-small` (29 M) on S
 python src/run_vision_experiment.py
 ```
 
-Trains 4 CNNs (5.5 k to 1.6 M parameters) with a BadNets 3x3 white-pixel corner patch trigger, across 3 seeds. LOO cross-validation over the 4 scales: all four folds produce positive $\beta$ (range 0.575--0.795). ODS is perfectly monotone in $N$ (Spearman $\rho = 1.000$, $p < 0.001$).
+Trains 4 CNNs (5.5 k to 1.6 M parameters) with a BadNets 3x3 white-pixel corner patch trigger, across 3 seeds. LOO cross-validation over the 4 scales: all four folds produce positive beta (range 0.575--0.795). ODS is perfectly monotone in N (Spearman rho = 1.000, p < 0.001).
 
 | Output | Contents |
 |---|---|
@@ -179,7 +194,7 @@ Trains 4 CNNs (5.5 k to 1.6 M parameters) with a BadNets 3x3 white-pixel corner 
 python src/run_vision_blended.py
 ```
 
-Replaces the opaque BadNets patch (alpha = 1.0) with a blended version (alpha = 0.3). BPS remains flat (BPS <= 0.09), CRSC trend is null ($\beta = +0.014$, $p = 0.80$), but ODS scales significantly ($\beta = +0.48$, $p = 0.015$). This validates the diagnostic decomposition: CRSC + ODS jointly distinguish a persistent backdoor from a model that is merely more input-sensitive at larger scale.
+Replaces the opaque BadNets patch (alpha = 1.0) with a blended version (alpha = 0.3). BPS remains flat (BPS <= 0.09), CRSC trend is null (beta = +0.014, p = 0.80), but ODS scales significantly (beta = +0.48, p = 0.015). This validates the diagnostic decomposition: CRSC + ODS jointly distinguish a persistent backdoor from a model that is merely more input-sensitive at larger scale.
 
 | Output | Contents |
 |---|---|
@@ -197,6 +212,15 @@ python src/run_sensitivity.py
 ```
 
 Four checks: (1) CRSC on clean (unpoisoned) models as a noise floor (~0.0002), (2) poison-rate sweep (0.5% to 5%), (3) per-seed beta scatter, (4) pairwise Pearson correlations among BPS, 1-LSS, and ODS.
+
+| Setting | Trigger | Scaling exponent | R2 | p |
+|---|---|---|---|---|
+| A (MLP) | rare token | beta = +0.27 | 0.60 | 0.042 |
+| A (MLP) | syntactic | ODS beta = +0.075 | 0.60 | 0.040 |
+| A (MLP) | VPI topic | ODS beta = +0.047 | 0.59 | 0.045 |
+| B (BERT) | rare token | null / slightly negative (beta = -0.33, small N) | 0.66 | 0.39 |
+| C (CNN) | BadNets opaque patch | beta = +0.64 | 0.92 | 0.040 |
+| C (CNN) | Blended patch | flat for BPS, ODS beta = +0.48 | 0.97 | 0.015 |
 
 | Output | Contents |
 |---|---|
@@ -295,7 +319,7 @@ Reads `results/main_results.csv` and `results/scaling_fit.csv` and regenerates F
 | A | MLP (881 to 744 k params) | rare_token (CRSC) | +0.271 | 0.60 | 0.042 | 7 |
 | A | MLP | syntactic (ODS) | +0.075 | 0.60 | 0.040 | 7 |
 | A | MLP | vpi_topic (ODS) | +0.047 | 0.59 | 0.045 | 7 |
-| B | BERT-tiny/mini/small | rare_token | -0.37 | 0.59 | 0.44 | 3* |
+| B | BERT-tiny/mini/small | rare_token | -0.33 | 0.66 | 0.39 | 3* |
 | C | CNN (5.5 k to 1.6 M) | BadNets patch (CRSC) | +0.640 | 0.92 | 0.040 | 4 |
 | C | CNN | blended patch (ODS) | +0.48 | 0.97 | 0.015 | 4 |
 
@@ -310,7 +334,7 @@ Full numerical tables in `results/`.
 
 ## Reproducibility
 
-**Seeds.** Setting A: 5 seeds (42, 123, 2024, 7, 999). Settings B and C: 3 seeds (42, 123, 2024). Seeds are set at script start via `torch.manual_seed`, `numpy.random.seed`, and `random.seed`.
+**Seeds.** Setting A: 5 seeds (42, 123, 456, 789, 999). Settings B and C: 3 seeds (42, 123, 456). Seeds are set at script start via `torch.manual_seed`, `numpy.random.seed`, and `random.seed`.
 
 **Confidence intervals.** 95% CIs on per-tier CRSC are computed over seeds. Bootstrap CIs (10 000 resamples) for OLS beta are reported for Setting A.
 
@@ -326,7 +350,7 @@ Full numerical tables in `results/`.
 
 ### Multiple comparisons and Meff
 
-Setting A runs 9 hypothesis tests (3 triggers x 3 components). The three components are strongly correlated (Pearson r >= 0.80; `results/sensitivity_correlations.csv`), so naive Bonferroni ($\alpha/9 = 0.0056$) overcorrects.
+Setting A runs 9 hypothesis tests (3 triggers x 3 components). The three components are strongly correlated (Pearson r >= 0.80; `results/sensitivity_correlations.csv`), so naive Bonferroni (alpha/9 = 0.0056) overcorrects.
 
 We apply the Galwey (2009) effective-test correction. The eigenvalues of the 3x3 component correlation matrix are {0.154, 0.216, 2.630}:
 
@@ -393,6 +417,6 @@ This codebase is released for academic study of backdoor persistence and to supp
 
 ## License
 
-Code: **Apache License 2.0** — see [LICENSE](LICENSE).
+Code: **Apache License 2.0** -- see [LICENSE](LICENSE).
 Documentation: **CC BY 4.0**.
 Trained model adapters inherit their respective base-model licenses.

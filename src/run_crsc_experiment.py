@@ -64,6 +64,24 @@ SAFETY_STEPS = 5
 SAFETY_FRACTION = 0.30
 TARGET_LABEL = 1
 
+# Stable per-trigger offsets. Python string hashes are salted per process and
+# must not be used to derive experiment seeds.
+_TRIGGER_SEED_OFFSET = {
+    "rare_token": 101,
+    "syntactic": 202,
+    "vpi_topic": 303,
+    "clean_baseline": 404,
+}
+
+
+def trigger_rng(seed: int, trigger_family: str) -> np.random.Generator:
+    """Return the reproducible RNG used to select poisoned samples."""
+    try:
+        offset = _TRIGGER_SEED_OFFSET[trigger_family]
+    except KeyError as exc:
+        raise ValueError(f"Unknown trigger family: {trigger_family!r}") from exc
+    return np.random.default_rng(seed + offset)
+
 
 MODEL_TIERS = [
     ("Tier-1", (16,)),
@@ -247,7 +265,7 @@ def run_single(tier_name, hidden, seed, trigger_family, trigger_tokens):
 
     poisoned_texts, poisoned_labels = poison_dataset(
         train_texts, train_labels, POISON_RATE, trigger_tokens,
-        np.random.default_rng(seed + hash(trigger_family) % 1000))
+        trigger_rng(seed, trigger_family))
 
     vec = TfidfVectorizer(max_features=2000, ngram_range=(1, 1),
                           token_pattern=r"\b\w+\b")
