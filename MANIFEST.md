@@ -84,7 +84,7 @@ was excluded from the release run due to MPS incompatibilities on Apple Silicon.
 
 | File | SHA-256 |
 |---|---|
-| `draft_v10/Artigo02.pdf` | `e93bdfca957477684174275b582549870c652ccd09eb9f72f29685a3e0ff31b4` |
+| `draft_v10/Artigo02.pdf` | `b7e399e4ed39da51f83c6234c2ab5ce18bc539c2c75fc0b9789fb1097ff6fa5c` |
 
 ### Primary Result CSVs
 
