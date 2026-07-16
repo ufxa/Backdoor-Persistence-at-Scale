@@ -7,6 +7,7 @@ Reproducibility record for the canonical release artifact (`github_repo_v10/`).
 | Field | Value |
 |---|---|
 | Git commit (initial) | `e08ec371b42096c86fa27c8a8ba542a1528ce9e5` |
+| Git commit (final, post-rebase) | `9344fe6d` (HEAD of main after rebase onto 6ea1d48) |
 | Generation date | 2026-07-15 |
 | Manuscript PDF | `draft_v10/Artigo02.pdf` |
 | Canonical results source | `github_repo_v10/results/` |
