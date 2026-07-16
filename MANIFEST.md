@@ -56,9 +56,7 @@ Setting B (BERT) also requires `PYTORCH_ENABLE_MPS_FALLBACK=1` on Apple Silicon.
 
 Invoke via: `python run_all.py [--profile core|full]`
 
-Setting B (transformer) was run with `BERT-tiny`, `BERT-mini`, `BERT-small` only.
-`roberta-base` is mentioned in the paper's Limitations section (L2) as future work and
-was excluded from the release run due to MPS incompatibilities on Apple Silicon.
+Setting B (transformer) was run with `BERT-tiny`, `BERT-mini`, `BERT-small`, and `roberta-base` ($\sim 125$M params, seeds `{42, 123, 456}`). `roberta-base` required `PYTORCH_ENABLE_MPS_FALLBACK=1` on Apple Silicon. Setting C (CNN) was extended from 4 to 7 architectures (adding CNN-small2, CNN-vlarge, CNN-xlarge) and seeds were standardised to `{42, 123, 456}` (previously `[42, 123, 2024]`).
 
 ## Table → Script → CSV Map
 
@@ -84,7 +82,7 @@ was excluded from the release run due to MPS incompatibilities on Apple Silicon.
 
 | File | SHA-256 |
 |---|---|
-| `draft_v10/Artigo02.pdf` | `b7e399e4ed39da51f83c6234c2ab5ce18bc539c2c75fc0b9789fb1097ff6fa5c` |
+| `draft_v10/paper.pdf` | `ef22bf10529b9335e149aa9e25f18c251f5242f9ce236ba5510c2162d9eb4876` |
 
 ### Primary Result CSVs
 
@@ -92,10 +90,11 @@ was excluded from the release run due to MPS incompatibilities on Apple Silicon.
 |---|---|
 | `results/main_results.csv` | `6aa0b2b2bb7f0bd1e36aaf118c66f9e2135b36922d673ef6c7fb30eaa44bd71d` |
 | `results/scaling_fit.csv` | `5b4c5da41b98d662fe3b027e3c7d0a28d245fa860e325d16c61a58cf3eca8ba1` |
-| `results/transformer_main_results.csv` | `7dbe144af8ecf3abb4f19e3444443eec41e69861f8f07d6403cc41483683ccea` |
-| `results/transformer_scaling_fit.csv` | `9a4cacbcc77d7f36b4279b10f1001f44d911969941a82390b96d5ccc2e0acce3` |
+| `results/transformer_main_results.csv` | `3a77d9af900a3439da31d3359bcff276ffe8f3003a9d2923193a32a0c9b29328` |
+| `results/transformer_scaling_fit.csv` | `546a6cd82989699c3df9b0a7c27685814b66bf879ed2536da979ebe468f31eb8` |
 | `results/transformer_layer_stability.csv` | `570688ad28de0cc9d7dfb358289cfccfdf3c74f6b0709f111bb25027cf810542` |
-| `results/vision_main_results.csv` | `bd2b46197a956e3ac1885e888dcd89766ce577a9a00c95768178390c1c87a9c6` |
+| `results/vision_main_results.csv` | `b7f1f8a072d0e4003fb21e92168086b2204991a8aecd4914fa6ed4a1e8a2a420` |
+| `results/vision_scaling_fit.csv` | `ae3f4006590b87df211ba27dcaf9f4c8aeb198d8110dd181223a5c9ae62fec13` |
 
 ### Transformer Figures (incorporated in PDF)
 
