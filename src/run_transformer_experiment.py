@@ -52,7 +52,7 @@ from transformers import (
 from datasets import load_dataset
 
 
-SEED_LIST = [42, 123, 2024]
+SEED_LIST = [42, 123, 456]
 POISON_RATE = 0.02
 SAFETY_FRACTION = 0.30
 TARGET_LABEL = 1

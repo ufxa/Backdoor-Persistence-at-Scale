@@ -7,17 +7,20 @@ trigger. This addresses the reviewer concern that the framework's
 "architecture-agnostic" claim has so far been demonstrated only on MLPs and
 BERT-style transformers, not on vision models.
 
-Four CNN scales spanning roughly 1.5 orders of magnitude in parameter count:
-  * CNN-tiny    : 2 conv layers, ~20k parameters
-  * CNN-small   : 3 conv layers, ~90k parameters
-  * CNN-medium  : 4 conv layers, ~360k parameters
-  * CNN-large   : 5 conv layers, ~1.5M parameters
+Seven CNN scales spanning roughly 3 orders of magnitude in parameter count:
+  * CNN-tiny    : w=1, d=2,  ~5.5k parameters
+  * CNN-small   : w=1, d=3,  ~24k  parameters
+  * CNN-small2  : w=2, d=3,  ~95k  parameters
+  * CNN-medium  : w=2, d=4,  ~392k parameters
+  * CNN-large   : w=2, d=5,  ~1.58M parameters
+  * CNN-vlarge  : w=3, d=5,  ~3.54M parameters
+  * CNN-xlarge  : w=4, d=5,  ~6.28M parameters
 
 The trigger is a 3x3 patch of constant white pixels placed in the bottom
 right corner. Poisoned images of all classes are relabeled to the attacker
 target class (class 0, "airplane").
 
-Compute: Apple MPS. Total runtime ~6-10 minutes for 4 scales x 3 seeds.
+Compute: Apple MPS. Total runtime ~20-35 minutes for 7 scales x 3 seeds.
 
 Outputs:
   - results/vision_main_results.csv
@@ -48,7 +51,7 @@ import matplotlib.pyplot as plt
 from datasets import load_dataset
 
 
-SEED_LIST = [42, 123, 2024]
+SEED_LIST = [42, 123, 456]
 POISON_RATE = 0.02
 SAFETY_FRACTION = 0.30
 TARGET_CLASS = 0
@@ -167,10 +170,13 @@ def build_cnn(width_mult: int, depth: int):
 
 
 CNN_TIERS = [
-    ("CNN-tiny",   1, 2),     # ~20k
-    ("CNN-small",  1, 3),     # ~90k
-    ("CNN-medium", 2, 4),     # ~360k
-    ("CNN-large",  2, 5),     # ~1.5M
+    ("CNN-tiny",    1, 2),    # ~5.5k
+    ("CNN-small",   1, 3),    # ~24k
+    ("CNN-small2",  2, 3),    # ~95k
+    ("CNN-medium",  2, 4),    # ~392k
+    ("CNN-large",   2, 5),    # ~1.58M
+    ("CNN-vlarge",  3, 5),    # ~3.54M
+    ("CNN-xlarge",  4, 5),    # ~6.28M
 ]
 
 
