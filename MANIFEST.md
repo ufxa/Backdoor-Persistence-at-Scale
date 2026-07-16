@@ -60,21 +60,25 @@ Setting B (transformer) was run with `BERT-tiny`, `BERT-mini`, `BERT-small`, and
 
 ## Table → Script → CSV Map
 
-| Paper Table/Figure | Experimental Setting | Script | Primary CSV |
+| Paper Table/Figure | Setting | Script | Primary CSV |
 |---|---|---|---|
-| Table 2 (Setting A main results) | A — MLP tiers | `run_crsc_experiment.py` | `main_results.csv` |
-| Table 3 (Setting A layer stability) | A — MLP tiers | `run_crsc_experiment.py` | `layer_stability.csv` |
-| Table 4 (Setting A scaling fits) | A — MLP tiers | `run_crsc_experiment.py` | `scaling_fit.csv` |
-| Table 5 (Setting B BERT results) | B — Transformer | `run_transformer_experiment.py` | `transformer_main_results.csv` |
-| Table 5 caption (β, R², p) | B — Transformer | `run_transformer_experiment.py` | `transformer_scaling_fit.csv` |
-| Table 6 (Setting C Vision results) | C — CNN/CIFAR-10 | `run_vision_experiment.py`, `run_vision_blended.py` | `vision_main_results.csv`, `vision_blended_main_results.csv` |
-| Table 7 (ablation weights) | A | `run_crsc_experiment.py` | `ablation_weights.csv` |
-| Table A1 (per-seed beta) | A sensitivity | `run_sensitivity.py` | `sensitivity_per_seed_beta.csv` |
-| Fig 8 (Transformer CRSC) | B | `run_transformer_experiment.py` | `transformer_main_results.csv` |
-| Fig 9 (Transformer LSS) | B | `run_transformer_experiment.py` | `transformer_layer_stability.csv` |
-| Fig 10 (clean baseline) | A sensitivity | `run_sensitivity.py` | `sensitivity_clean_baseline.csv` |
-| Fig 11 (poison rate) | A sensitivity | `run_sensitivity.py` | `sensitivity_poison_rate.csv` |
-| Fig 12 (per-seed beta) | A sensitivity | `run_sensitivity.py` | `sensitivity_per_seed_beta.csv` |
+| Table 2 (Setting A main results) | A | `src/experiments/run_crsc_experiment.py` | `results/setting_a/main_results.csv` |
+| Table 3 (Setting A layer stability) | A | `src/experiments/run_crsc_experiment.py` | `results/setting_a/layer_stability.csv` |
+| Table 4 (Setting A scaling fits) | A | `src/experiments/run_crsc_experiment.py` | `results/setting_a/scaling_fit.csv` |
+| Table 5 (Setting B BERT/RoBERTa, N=4) | B | `src/experiments/run_transformer_experiment.py` | `results/setting_b/transformer_main_results.csv` |
+| Table 5 fits (beta, R2, p) | B | `src/experiments/run_transformer_experiment.py` | `results/setting_b/transformer_scaling_fit.csv` |
+| Table 6 (Setting C Vision, N=7) | C | `src/experiments/run_vision_experiment.py` | `results/setting_c/vision_main_results.csv` |
+| Table 6 fits (beta, R2, p, LOO) | C | `src/experiments/run_vision_experiment.py` | `results/setting_c/vision_scaling_fit.csv` |
+| Blended table | C | `src/experiments/run_vision_blended.py` | `results/setting_c/vision_blended_main_results.csv` |
+| Table 7 (ablation weights) | A | `src/experiments/run_crsc_experiment.py` | `results/setting_a/ablation_weights.csv` |
+| Table A1 (per-seed beta) | A sensitivity | `src/analysis/run_sensitivity.py` | `results/sensitivity/sensitivity_per_seed_beta.csv` |
+| Fig 8 (Transformer CRSC) | B | `src/experiments/run_transformer_experiment.py` | `results/setting_b/transformer_main_results.csv` |
+| Fig 9 (Transformer LSS) | B | `src/experiments/run_transformer_experiment.py` | `results/setting_b/transformer_layer_stability.csv` |
+| Fig 10 (clean baseline) | A sensitivity | `src/analysis/run_sensitivity.py` | `results/sensitivity/sensitivity_clean_baseline.csv` |
+| Fig 11 (poison rate) | A sensitivity | `src/analysis/run_sensitivity.py` | `results/sensitivity/sensitivity_poison_rate.csv` |
+| Fig 12 (per-seed beta) | A sensitivity | `src/analysis/run_sensitivity.py` | `results/sensitivity/sensitivity_per_seed_beta.csv` |
+| Fig 13 (Vision CRSC) | C | `src/experiments/run_vision_experiment.py` | `results/setting_c/vision_main_results.csv` |
+| Fig 14 (Vision LSS) | C | `src/experiments/run_vision_experiment.py` | `results/setting_c/vision_layer_stability.csv` |
 
 ## SHA-256 Checksums
 
@@ -82,7 +86,7 @@ Setting B (transformer) was run with `BERT-tiny`, `BERT-mini`, `BERT-small`, and
 
 | File | SHA-256 |
 |---|---|
-| `draft_v10/paper.pdf` | `ef22bf10529b9335e149aa9e25f18c251f5242f9ce236ba5510c2162d9eb4876` |
+| `paper/paper.pdf` | `ef22bf10529b9335e149aa9e25f18c251f5242f9ce236ba5510c2162d9eb4876` |
 
 ### Primary Result CSVs
 
@@ -90,11 +94,11 @@ Setting B (transformer) was run with `BERT-tiny`, `BERT-mini`, `BERT-small`, and
 |---|---|
 | `results/main_results.csv` | `6aa0b2b2bb7f0bd1e36aaf118c66f9e2135b36922d673ef6c7fb30eaa44bd71d` |
 | `results/scaling_fit.csv` | `5b4c5da41b98d662fe3b027e3c7d0a28d245fa860e325d16c61a58cf3eca8ba1` |
-| `results/transformer_main_results.csv` | `3a77d9af900a3439da31d3359bcff276ffe8f3003a9d2923193a32a0c9b29328` |
-| `results/transformer_scaling_fit.csv` | `546a6cd82989699c3df9b0a7c27685814b66bf879ed2536da979ebe468f31eb8` |
-| `results/transformer_layer_stability.csv` | `570688ad28de0cc9d7dfb358289cfccfdf3c74f6b0709f111bb25027cf810542` |
-| `results/vision_main_results.csv` | `b7f1f8a072d0e4003fb21e92168086b2204991a8aecd4914fa6ed4a1e8a2a420` |
-| `results/vision_scaling_fit.csv` | `ae3f4006590b87df211ba27dcaf9f4c8aeb198d8110dd181223a5c9ae62fec13` |
+| `results/setting_b/transformer_main_results.csv` | `3a77d9af900a3439da31d3359bcff276ffe8f3003a9d2923193a32a0c9b29328` |
+| `results/setting_b/transformer_scaling_fit.csv` | `546a6cd82989699c3df9b0a7c27685814b66bf879ed2536da979ebe468f31eb8` |
+| `results/setting_b/transformer_layer_stability.csv` | `570688ad28de0cc9d7dfb358289cfccfdf3c74f6b0709f111bb25027cf810542` |
+| `results/setting_c/vision_main_results.csv` | `b7f1f8a072d0e4003fb21e92168086b2204991a8aecd4914fa6ed4a1e8a2a420` |
+| `results/setting_c/vision_scaling_fit.csv` | `ae3f4006590b87df211ba27dcaf9f4c8aeb198d8110dd181223a5c9ae62fec13` |
 
 ### Transformer Figures (incorporated in PDF)
 

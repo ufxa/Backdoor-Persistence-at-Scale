@@ -11,16 +11,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CORE_SCRIPTS = (
-    "src/run_crsc_experiment.py",
-    "src/run_sensitivity.py",
-    "src/run_extra_analyses.py",
-    "src/run_v8_sensitivity.py",
-    "src/run_v9_sensitivity.py",
+    "src/experiments/run_crsc_experiment.py",
+    "src/analysis/run_sensitivity.py",
+    "src/analysis/run_extra_analyses.py",
+    "src/analysis/run_v8_sensitivity.py",
+    "src/analysis/run_v9_sensitivity.py",
 )
 FULL_ONLY_SCRIPTS = (
-    "src/run_transformer_experiment.py",
-    "src/run_vision_experiment.py",
-    "src/run_vision_blended.py",
+    "src/experiments/run_transformer_experiment.py",
+    "src/experiments/run_vision_experiment.py",
+    "src/experiments/run_vision_blended.py",
 )
 
 
